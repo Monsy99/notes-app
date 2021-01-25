@@ -12,7 +12,7 @@ const generateHistory = ({ note }) => {
       {note.history.length ? (
         note.history.map((record) => {
           return (
-            <Accordion key={`${record.modified}${record.note.title}`}>
+            <Accordion key={`${record.updatedAt}${record.note.title}`}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography>
                   {new Date(record.modified).toLocaleString()}
