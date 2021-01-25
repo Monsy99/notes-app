@@ -10,7 +10,7 @@ const getNotes = async () => {
   return data;
 };
 const getDeletedNotes = async () => {
-  const data = await axios.get(`${apiAdress}/history`).then((response) => {
+  const data = await axios.get(`${apiAdress}/deleted`).then((response) => {
     const responseInfo = response.data;
     return responseInfo.data;
   });
