@@ -1,5 +1,6 @@
 const Note = require("../models/note-model");
-
+// mapToRecent  maps the note object to contain only the most recent information about
+// note by default the note contains its own version history under "history" key
 const mapToRecent = (note) => {
   return {
     title: note.current.title,
@@ -27,17 +28,12 @@ createNote = (req, res) => {
       error: "Missing parameters",
     });
   }
-  const deleted = false;
-  const history = [];
-  const version = 0;
-
   const note = new Note({
     current: { title: title, content: content },
-    version: version,
-    history: history,
-    deleted: deleted,
+    version: 0,
+    history: [],
+    deleted: false,
   });
-
   note
     .save()
     .then((note) => {
@@ -60,32 +56,33 @@ updateNote = async (req, res) => {
   if (!body) {
     return res.status(400).json({
       success: false,
-      error: "You need to provide a proper object tu update a note",
+      error: "You need to provide a proper object to update a note",
     });
   }
   const { title = "", content = "" } = body;
-  // both parameters are required to update
-  if (!title || !content) {
+  if (!content) {
     return res.status(400).json({
       success: false,
       error: "Missing update parameters",
     });
   }
   Note.findOne({ _id: req.params.id }, (error, note) => {
-    if (error || !note) {
+    if (error) {
       return res.status(404).json({
-        error,
+        success: false,
         message: "There was an error trying to get a note",
       });
     }
     if (!note) {
       return res.status(404).json({
-        error,
+        success: false,
         message: "Note not found!",
       });
     }
-    //pushing an object that we can later use for history
+    // pushing an object that we can later use for history
     note.history.push(
+      // the json parse json stringify construction is here to create a new
+      // instance of an object instead of passing a reference
       JSON.parse(
         JSON.stringify({
           note: note.current,
@@ -94,7 +91,7 @@ updateNote = async (req, res) => {
         })
       )
     );
-    note.current.title = title;
+    note.current.title = title ? title : note.current.title;
     note.current.content = content;
     note.version = note.version + 1;
     note
@@ -108,7 +105,7 @@ updateNote = async (req, res) => {
       })
       .catch((error) => {
         return res.status(404).json({
-          error,
+          success: false,
           message: "Note not updated!",
         });
       });
