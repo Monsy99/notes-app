@@ -43,6 +43,7 @@ const generateNote = ({ note, dispatch, history, toggleEditing, id }) => {
         variant="outlined"
         size="large"
         color="primary"
+        disabled={isDeleted}
       >
         ✏️ Edit this note
       </Button>
