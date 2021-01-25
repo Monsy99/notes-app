@@ -9,8 +9,8 @@ router.put("/note/:id", NotesCtrl.updateNote);
 router.delete("/note/:id", NotesCtrl.deleteNote);
 router.get("/note/:id", NotesCtrl.getNoteById);
 router.get("/notes", NotesCtrl.getNotes);
-router.get("/history", NotesCtrl.getDeletedNotes);
-router.get("/history/:id", NotesCtrl.getAnyNoteById);
+router.get("/deleted", NotesCtrl.getDeletedNotes);
+router.get("/history/:id", NotesCtrl.getFullNoteById);
 router.get("/setup", NotesCtrl.testSetup);
 
 module.exports = router;
