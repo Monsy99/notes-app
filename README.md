@@ -17,21 +17,3 @@ You can download it [here](https://nodejs.org/en/download/)
 2. "npm start" <-it will start a react project and open in at [http://localhost:5000](http://localhost:5000)
 
 ### If everything worked correctly then you should see an interface with the "Notes CRUD app" ;)
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:5000](http://localhost:5000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
