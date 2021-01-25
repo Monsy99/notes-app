@@ -4,7 +4,6 @@ import { useHistory, useParams } from "react-router-dom";
 import Wrapper from "../../Components/Wrapper";
 import {
   fetchAnyNote,
-  fetchNote,
   selectError,
   selectLoading,
   selectNote,
@@ -14,7 +13,7 @@ import Error from "../../Components/Error";
 import Loader from "../../Components/Loader";
 import generateNote from "./generateNote";
 
-const Note = ({ historical = false }) => {
+const Note = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const { id } = useParams();
@@ -29,11 +28,7 @@ const Note = ({ historical = false }) => {
 
   useEffect(() => {
     if (!note && !loading) {
-      if (historical) {
-        dispatch(fetchAnyNote(id));
-      } else {
-        dispatch(fetchNote(id));
-      }
+      dispatch(fetchAnyNote(id));
     }
   });
 
