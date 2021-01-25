@@ -42,8 +42,8 @@ const List = ({ notes, historical = false }) => {
   const rows = notes.map((note) => {
     return {
       id: note._id,
-      title: note.current.title,
-      content: note.current.content,
+      title: note.title,
+      content: note.content,
       createdAt: new Date(note.createdAt),
       updatedAt: new Date(note.updatedAt),
     };
@@ -52,16 +52,12 @@ const List = ({ notes, historical = false }) => {
     <>
       <Box style={{ height: "70vh", width: "100%" }}>
         <Typography variant="h5">
-          {historical ? "Deleted notes" : "Notes list"}
+          {historical ? "Deleted notes" : "Note list"}
         </Typography>
         <DataGrid
           onCellClick={(element) => {
             if (element.field === "title") {
-              if (historical) {
-                history.push(`/history/${element.row.id}`);
-              } else {
-                history.push(`/note/${element.row.id}`);
-              }
+              history.push(`/history/${element.row.id}`);
             }
           }}
           sortModel={sortModel}
