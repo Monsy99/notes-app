@@ -50,9 +50,9 @@ const Modal = ({
     setTitle("");
     setContent("");
     setTimeout(() => {
+      // we set window location so it forces browser to reload a "/notes" page
       window.location = window.location.origin;
     }, 400);
-    //timeout is there to make sure the request is already handled and we can see a new version of note
   };
 
   return (
