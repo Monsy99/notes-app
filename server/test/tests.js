@@ -100,6 +100,20 @@ describe("API CALLS TESTING", () => {
         });
     });
   });
+  describe("#GET /note/:id", () => {
+    it("should NOT get note (incorrect id but correct length and form)", (done) => {
+      chai
+        .request(server)
+        .get(`/api/note/60100024726c9720f4458b80`)
+        .end((err, response) => {
+          if (err) done(err);
+          expect(response).to.have.status(404);
+          expect(response).to.be.an("object");
+          expect(response.body.success).to.be.eq(false);
+          done();
+        });
+    });
+  });
   describe("#GET /history/:id", () => {
     it("should get deleted note by id", (done) => {
       chai
@@ -124,6 +138,20 @@ describe("API CALLS TESTING", () => {
         .end((err, response) => {
           if (err) done(err);
           expect(response).to.have.status(400);
+          expect(response).to.be.an("object");
+          expect(response.body.success).to.be.eq(false);
+          done();
+        });
+    });
+  });
+  describe("#GET /history/:id", () => {
+    it("should not get deleted note by id (incorrect id, but correct length and form)", (done) => {
+      chai
+        .request(server)
+        .get(`/api/history/60100024726c9720f4458b80`)
+        .end((err, response) => {
+          if (err) done(err);
+          expect(response).to.have.status(404);
           expect(response).to.be.an("object");
           expect(response.body.success).to.be.eq(false);
           done();
