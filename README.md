@@ -6,7 +6,7 @@
 
 - To make sure everything is working run
 
- `npm -v`
+`npm -v`
 
 - You should get a message with information about your npm version
 
@@ -21,7 +21,7 @@
 
 - Run:
 
- `mongod.exe`
+`mongod.exe`
 
 In the pathname argument you can specify a folder to save the db files but it's not necessary
 
@@ -33,15 +33,15 @@ In the pathname argument you can specify a folder to save the db files but it's 
 
 - Install packages with
 
- `npm install`
+`npm install`
 
 - To test if the server is working with the database run
 
- `npm test`
+`npm test`
 
-- If the tests are passed terminate current process and run (found an issue with 2 tests not passing on first iteration, app works without any issues)
+- If the tests are passed terminate current process and run: (26.01 update - the tests are now being run in a in-memory db, no issues found)
 
- `node index.js`
+`node index.js`
 
 - If there is a "connected to database _url_" message then we are ready to CRUD the notes
 
@@ -53,7 +53,7 @@ In the pathname argument you can specify a folder to save the db files but it's 
 
 - Start the client side
 
- `npm start`
+`npm start`
 
 ## 5. Usage
 
@@ -67,7 +67,7 @@ In the pathname argument you can specify a folder to save the db files but it's 
 
 Server url by default should run on port 3000
 
- `localhost:3000`
+`localhost:3000`
 
 <br>
 
