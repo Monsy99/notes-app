@@ -1,0 +1,21 @@
+{
+  "name": "notes-app",
+  "version": "1.0.0",
+  "description": "### 1.Make sure you have node.js installed",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build --prefix client",
+    "start": "node server/server.js",
+    "test": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Monsy99/notes-app.git"
+  },
+  "author": "Szymon Marczuk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Monsy99/notes-app/issues"
+  },
+  "homepage": "https://github.com/Monsy99/notes-app#readme"
+}
