@@ -68,15 +68,9 @@ updateNote = async (req, res) => {
   }
   Note.findOne({ _id: req.params.id }, (error, note) => {
     if (error) {
-      return res.status(404).json({
+      return res.status(400).json({
         success: false,
         message: "There was an error trying to get a note",
-      });
-    }
-    if (!note) {
-      return res.status(404).json({
-        success: false,
-        message: "Note not found!",
       });
     }
     // pushing an object that we can later use for history
@@ -120,14 +114,11 @@ deleteNote = async (req, res) => {
         error: "There was an error trying to get the note",
       });
     }
-    if (!note) {
-      return res.status(404).json({ success: false, error: `Note not found` });
-    }
     note.deleted = true;
     note.save().then(() => {
       return res.status(200).json({
         success: true,
-        id: note._id,
+        _id: note._id,
         message: "Note marked as deleted!",
       });
     });
@@ -136,14 +127,11 @@ deleteNote = async (req, res) => {
 
 getNoteById = async (req, res) => {
   Note.findOne({ _id: req.params.id, deleted: false }, (error, note) => {
-    if (error) {
+    if (error || !note) {
       return res.status(400).json({
         success: false,
         error: "There was an error trying to get the note",
       });
-    }
-    if (!note) {
-      return res.status(404).json({ success: false, error: `Note not found` });
     }
     return res.status(200).json({ success: true, data: mapToRecent(note) });
   });
@@ -186,9 +174,6 @@ getFullNoteById = async (req, res) => {
         success: false,
         error: "There was an error trying to get the note",
       });
-    }
-    if (!note) {
-      return res.status(404).json({ success: false, error: `Note not found` });
     }
     return res.status(200).json({ success: true, data: note });
   });
