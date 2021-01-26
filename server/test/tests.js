@@ -176,7 +176,7 @@ describe("API CALLS TESTING", () => {
         })
         .end((err, response) => {
           if (err) done(err);
-          expect(response).to.have.status(404);
+          expect(response).to.have.status(400);
           expect(response.body.success).to.be.eq(false);
           done();
         });
