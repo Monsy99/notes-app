@@ -12,8 +12,6 @@
 
 ## 2. In order to run the project you need to have a local mongoDB
 
-<<<<<<< HEAD
-
 - You can download it [here](https://www.mongodb.com/try/download/community)
 
 - To make sure you properly installed mongodb run:
