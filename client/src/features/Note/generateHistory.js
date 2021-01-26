@@ -15,7 +15,7 @@ const generateHistory = ({ note }) => {
             <Accordion key={`${record.updatedAt}${record.note.title}`}>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography>
-                  {new Date(record.modified).toLocaleString()}
+                  {new Date(record.updatedAt).toLocaleString()}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails style={{ display: "grid", gridGap: "10px" }}>
