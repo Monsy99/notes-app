@@ -1,14 +1,25 @@
+const express = require("express");
+const cors = require("cors");
+const router = require("../routes/api-router");
+const db = require("./memory-db/db");
 const chai = require("chai");
+const { expect } = chai;
 const chaiHttp = require("chai-http");
-const server = require("../index");
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+app.use("/api", router);
+const server = app.listen(9999);
 
 chai.should();
 chai.use(chaiHttp);
 
-const { expect } = chai;
-
 let id;
 let deletedId;
+
+before(async () => await db.connect());
 
 describe("API CALLS TESTING", () => {
   describe("#Setup the database for tests", () => {
@@ -255,3 +266,5 @@ describe("API CALLS TESTING", () => {
     });
   });
 });
+
+after(async () => await db.closeDatabase());
