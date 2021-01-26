@@ -14,18 +14,14 @@
 
 - You can download it [here](https://www.mongodb.com/try/download/community)
 
-- To make sure you properly installed mongodb run:
-
- `mongo --version`
-
-- It should return a message about your current mongo version
+- Create a directory for default mongo data path "C:\data\db"
 
 - Open a cmd in the bin directory of the installed folder.
   It might be under "C:\mongodb" or "C:\Program Files\MongoDB\Server\X.X\bin" (Windows)
 
 - Run:
 
- `mongod.exe --pathname "?path"`
+ `mongod.exe`
 
 In the pathname argument you can specify a folder to save the db files but it's not necessary
 
@@ -39,11 +35,11 @@ In the pathname argument you can specify a folder to save the db files but it's 
 
  `npm install`
 
-- To test if the server is working with the setup database run
+- To test if the server is working with the database run
 
  `npm test`
 
-- If the tests are passed terminate current process and run
+- If the tests are passed terminate current process and run (found an issue with 2 tests not passing on first iteration, app works without any issues)
 
  `node index.js`
 
