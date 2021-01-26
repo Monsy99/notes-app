@@ -111,10 +111,16 @@ deleteNote = async (req, res) => {
 
 getNoteById = async (req, res) => {
   Note.findOne({ _id: req.params.id, deleted: false }, (error, note) => {
-    if (error || !note) {
+    if (error) {
       return res.status(400).json({
         success: false,
         error: "There was an error trying to get the note",
+      });
+    }
+    if (!note) {
+      return res.status(404).json({
+        success: false,
+        error: "Note not found",
       });
     }
     return res.status(200).json({ success: true, data: mapToRecent(note) });
@@ -129,16 +135,28 @@ getNotes = async (req, res) => {
         error: "There was an error trying to get the notes",
       });
     }
+    if (!notes.length) {
+      return res.status(404).json({
+        success: false,
+        error: "Requested data is empty",
+      });
+    }
     const recentNotes = notes.map((note) => mapToRecent(note));
     return res.status(200).json({ success: true, data: recentNotes });
   });
 };
 getDeletedNotes = async (req, res) => {
   Note.find({ deleted: true }, (error, notes) => {
-    if (error || !notes.length) {
+    if (error) {
       return res.status(400).json({
         success: false,
         error: "There was an error trying to get the notes",
+      });
+    }
+    if (!notes.length) {
+      return res.status(404).json({
+        success: false,
+        error: "Requested data is empty",
       });
     }
     const recentNotes = notes.map((note) => mapToRecent(note));
@@ -151,6 +169,12 @@ getFullNoteById = async (req, res) => {
       return res.status(400).json({
         success: false,
         error: "There was an error trying to get the note",
+      });
+    }
+    if (!note) {
+      return res.status(404).json({
+        success: false,
+        error: "Note not found",
       });
     }
     return res.status(200).json({ success: true, data: note });
