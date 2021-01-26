@@ -61,13 +61,11 @@ In the pathname argument you can specify a folder to save the db files but it's 
 
 ## 5. Usage
 
-### The interface represents all features of the created API
+### The "client" interface represents all features of the created API
 
 <br>
 
 ![Usage](./images/usage_gif.gif)
-
-### The interface in the client directory represents all functions of the server
 
 ### Pathnames to CRUD notes with a curl
 
