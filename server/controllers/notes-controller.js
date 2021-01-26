@@ -34,21 +34,13 @@ createNote = (req, res) => {
     history: [],
     deleted: false,
   });
-  note
-    .save()
-    .then((note) => {
-      return res.status(201).json({
-        success: true,
-        _id: note._id,
-        message: "Note added!",
-      });
-    })
-    .catch((error) => {
-      return res.status(400).json({
-        success: false,
-        message: "There was an issue with saving the note to database",
-      });
+  note.save().then((note) => {
+    return res.status(201).json({
+      success: true,
+      _id: note._id,
+      message: "Note added!",
     });
+  });
 };
 
 updateNote = async (req, res) => {
@@ -67,7 +59,7 @@ updateNote = async (req, res) => {
     });
   }
   Note.findOne({ _id: req.params.id }, (error, note) => {
-    if (error) {
+    if (error || !note) {
       return res.status(400).json({
         success: false,
         message: "There was an error trying to get a note",
@@ -88,27 +80,19 @@ updateNote = async (req, res) => {
     note.current.title = title ? title : note.current.title;
     note.current.content = content;
     note.version = note.version + 1;
-    note
-      .save()
-      .then(() => {
-        return res.status(200).json({
-          success: true,
-          _id: note._id,
-          message: "Note updated!",
-        });
-      })
-      .catch((error) => {
-        return res.status(404).json({
-          success: false,
-          message: "Note not updated!",
-        });
+    note.save().then(() => {
+      return res.status(200).json({
+        success: true,
+        _id: note._id,
+        message: "Note updated!",
       });
+    });
   });
 };
 
 deleteNote = async (req, res) => {
   Note.findOne({ _id: req.params.id }, (error, note) => {
-    if (error) {
+    if (error || !note) {
       return res.status(400).json({
         success: false,
         error: "There was an error trying to get the note",
@@ -139,14 +123,11 @@ getNoteById = async (req, res) => {
 
 getNotes = async (req, res) => {
   Note.find({ deleted: false }, (error, notes) => {
-    if (error) {
+    if (error || !notes.length) {
       return res.status(400).json({
         success: false,
         error: "There was an error trying to get the notes",
       });
-    }
-    if (!notes.length) {
-      return res.status(404).json({ success: false, error: `Notes not found` });
     }
     const recentNotes = notes.map((note) => mapToRecent(note));
     return res.status(200).json({ success: true, data: recentNotes });
@@ -154,14 +135,11 @@ getNotes = async (req, res) => {
 };
 getDeletedNotes = async (req, res) => {
   Note.find({ deleted: true }, (error, notes) => {
-    if (error) {
+    if (error || !notes.length) {
       return res.status(400).json({
         success: false,
         error: "There was an error trying to get the notes",
       });
-    }
-    if (!notes.length) {
-      return res.status(404).json({ success: false, error: `Notes not found` });
     }
     const recentNotes = notes.map((note) => mapToRecent(note));
     return res.status(200).json({ success: true, data: recentNotes });
