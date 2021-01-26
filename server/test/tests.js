@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const router = require("../routes/api-router");
 const db = require("./memory-db/db");
 const chai = require("chai");
@@ -7,6 +8,7 @@ const chaiHttp = require("chai-http");
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use("/api", router);
 const server = app.listen(9999);
