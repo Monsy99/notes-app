@@ -43,7 +43,7 @@ createNote = (req, res) => {
   });
 };
 
-updateNote = async (req, res) => {
+updateNote = (req, res) => {
   const body = req.body;
   if (!body) {
     return res.status(400).json({
@@ -90,7 +90,7 @@ updateNote = async (req, res) => {
   });
 };
 
-deleteNote = async (req, res) => {
+deleteNote = (req, res) => {
   Note.findOne({ _id: req.params.id }, (error, note) => {
     if (error || !note) {
       return res.status(400).json({
@@ -109,7 +109,7 @@ deleteNote = async (req, res) => {
   });
 };
 
-getNoteById = async (req, res) => {
+getNoteById = (req, res) => {
   Note.findOne({ _id: req.params.id, deleted: false }, (error, note) => {
     if (error) {
       return res.status(400).json({
@@ -127,9 +127,9 @@ getNoteById = async (req, res) => {
   });
 };
 
-getNotes = async (req, res) => {
+getNotes = (req, res) => {
   Note.find({ deleted: false }, (error, notes) => {
-    if (error || !notes.length) {
+    if (error) {
       return res.status(400).json({
         success: false,
         error: "There was an error trying to get the notes",
@@ -145,7 +145,7 @@ getNotes = async (req, res) => {
     return res.status(200).json({ success: true, data: recentNotes });
   });
 };
-getDeletedNotes = async (req, res) => {
+getDeletedNotes = (req, res) => {
   Note.find({ deleted: true }, (error, notes) => {
     if (error) {
       return res.status(400).json({
@@ -163,7 +163,7 @@ getDeletedNotes = async (req, res) => {
     return res.status(200).json({ success: true, data: recentNotes });
   });
 };
-getFullNoteById = async (req, res) => {
+getFullNoteById = (req, res) => {
   Note.findOne({ _id: req.params.id }, (error, note) => {
     if (error) {
       return res.status(400).json({
@@ -183,7 +183,7 @@ getFullNoteById = async (req, res) => {
 
 // endpoint to prepare the database to test CRUD operations
 
-testSetup = async (req, res) => {
+testSetup = (req, res) => {
   Note.find({}, (error, notes) => {
     if (error) {
       return res.status(400).json({
